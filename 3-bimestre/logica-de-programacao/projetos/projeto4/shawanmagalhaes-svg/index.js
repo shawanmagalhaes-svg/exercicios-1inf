@@ -7,19 +7,19 @@ const statusPedido = "enviado"
 let prato
 switch (opcaoMenu) {
   case 1:
-    prato = "pastel de frango"
+    prato = "Pastel de Carne"
     break
   case 2:
-    prato = "pastel de queijo"
+    prato = "Pastel de Queijo"
     break
   case 3:
-    prato = "pastel de carne"
+    prato = "Caldo de Cana"
     break
   case 4:
-    prato = "pastel de chocolate"
+    prato = "Coxinha"
     break
   default:
-    prato = "Item não encontrado"
+    prato = "Opção inválida"
 }
 
 let precoUnitario
@@ -40,33 +40,40 @@ switch (opcaoMenu) {
     precoUnitario = 0
 }
 
-const subtotal = precoUnitario * quantidade;
-const freteStatus = subtotal >= 100 ? "frete gratis" : "frete pago"
+const subtotal = precoUnitario * quantidade
+const freteStatus = subtotal >= 100 ? "Frete grátis" : "Frete pago"
 const frete = subtotal >= 100 ? 0 : 12
 
-let pagamentoMensagem = "Pagamento não informado"
-let descontoPercentual = 0
-
+let pagamentoMensagem
 switch (formaPagamento) {
   case "pix":
-    pagamentoMensagem = "pix"
-    descontoPercentual = 0
+    pagamentoMensagem = "Pagamento via PIX"
     break
   case "cartao":
-    pagamentoMensagem = "cartao"
+    pagamentoMensagem = "Pagamento via cartão"
+    break
+  case "dinheiro":
+    pagamentoMensagem = "Pagamento em dinheiro"
+    break
+  default:
+    pagamentoMensagem = "Forma de pagamento inválida"
+}
+
+let descontoPercentual
+switch (formaPagamento) {
+  case "pix":
+  case "cartao":
     descontoPercentual = 5
     break
   case "dinheiro":
-    pagamentoMensagem = "dinheiro"
     descontoPercentual = 0
     break
   default:
-    pagamentoMensagem = "forma de pagamento inválida"
     descontoPercentual = 0
 }
 
 const desconto = subtotal * (descontoPercentual / 100)
-const total = subtotal + frete - desconto
+const total = subtotal - desconto + frete
 
 let statusMensagem
 switch (statusPedido) {
@@ -75,7 +82,7 @@ switch (statusPedido) {
     break
   case "aprovado":
     statusMensagem = "Pedido em preparo"
-    break;
+    break
   case "enviado":
     statusMensagem = "Pedido a caminho"
     break
@@ -99,7 +106,6 @@ Situação: ${statusMensagem}
 
 console.log(resumo)
 
-
 module.exports = {
   cliente,
   opcaoMenu,
@@ -118,10 +124,3 @@ module.exports = {
   statusMensagem,
   resumo
 }
-
-
-
-
-
-
- 
